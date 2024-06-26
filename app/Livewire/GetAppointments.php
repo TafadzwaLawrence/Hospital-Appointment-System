@@ -11,7 +11,17 @@ class GetAppointments extends Component
 
     public function mount()
     {
-        $this->data = Appointments::select('first_name', 'last_name', 'date_of_birth', 'phone', 'address', 'reason_of_visit', 'emergency_contact', 'email')->get();
+        $this->data = Appointments::select(
+            'id',
+            'first_name',
+            'last_name',
+            'date_of_birth',
+            'phone',
+            'address',
+            'reason_of_visit',
+            'emergency_contact',
+            'email'
+            )->get();
     }
     public function render()
     {

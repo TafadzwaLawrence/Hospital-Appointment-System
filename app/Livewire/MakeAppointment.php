@@ -32,9 +32,6 @@ class MakeAppointment extends Component
         );
 
         $this->resetInputFields();
-        session()->flash('message', 'Post successfully updated.');
-
-
         return view('livewire.make-appointment');
     }
 
