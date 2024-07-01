@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Appointments;
+use Illuminate\Http\Request;
 
 class MakeAppointment extends Component
 {
@@ -16,7 +17,7 @@ class MakeAppointment extends Component
     public $emergency_contact = '';
     public $email = '';
 
-    public function save()
+    public function save(Request $request)
     {
         Appointments::create(
             $this->only([
@@ -32,6 +33,7 @@ class MakeAppointment extends Component
         );
 
         $this->resetInputFields();
+        $this->emitTo('livewire-toast', 'show', 'Project Added Successfully');
         return view('livewire.make-appointment');
     }
 

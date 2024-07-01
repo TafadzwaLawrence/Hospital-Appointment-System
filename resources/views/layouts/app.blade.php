@@ -17,6 +17,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        @livewire('livewire-toast')
         <wireui:scripts />
     </head>
     <body class="font-sans antialiased">
