@@ -25,8 +25,15 @@ class AppointmentsController extends Controller
                 'booked' => true,
                 'doctor' => $user_id,
             ]);
+
+            notify()->success('Appointment Accepted');
+            $notification = array(
+                'message' => 'Successfully Done',
+                'alert-type' => 'success'
+            );
+
             DB::commit();
-            return redirect()->back()->with('success', 'Appointment Accepted');
+            return redirect()->back()->with($notification);
         } catch (ModelNotFoundException $e) {
             DB::Rollback();
             Log::error('Model error: ' . $e->getMessage());

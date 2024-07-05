@@ -11,6 +11,8 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.0",
+        "mckenziearts/laravel-notify": "^2.5",
+        "realrashid/sweet-alert": "*",
         "wire-elements/modal": "^2.0",
         "wireui/wireui": "^1.19"
     },

@@ -61,6 +61,7 @@
                     <form action="" id="accept-form" method="post">
                         @csrf
                         <button
+                        id="accept-btn"
                             type="submit" class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 sm:ml-3 sm:w-auto">
                                 Accept
                         </button>
@@ -88,4 +89,23 @@
         document.getElementById('patient-dob').innerHTML = `Date of Birth: ${dob}`;
         document.getElementById('patient-reason').innerHTML = `Reason for illness: ${reason}`;
     }
+</script>
+
+
+<script>
+    const form = document.getElementById('accept-form');
+
+    form.addEventListener('submit', () => {
+        const acceptBtn = document.getElementById('accept-btn');
+        acceptBtn.disabled = true;
+        acceptBtn.innerHTML = `
+            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12H4zm2 5.291A7.962 7.962 0 014 19.708a7.962 7.962 0 0114.708 0 1.992 1.992 0 012.121.691z"></path>
+            </svg>
+            Loading...
+        `;
+
+        // Add toast notification
+    });
 </script>
