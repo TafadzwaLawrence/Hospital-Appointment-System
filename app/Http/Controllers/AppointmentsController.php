@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AppointmentsController extends Controller
@@ -18,18 +17,16 @@ class AppointmentsController extends Controller
         $appointment = Appointments::findOrFail($id);
 
         try {
+            $user = auth()->user();
+            $user_id = $user->id;
             //code...
             DB::beginTransaction();
             $appointment->update([
                 'booked' => true,
-                'doctor' => Auth::id(),
+                'doctor' => $user_id,
             ]);
             DB::commit();
-            return response()->json([
-                'success'       => true,
-                'message'       => 'Appointment Accepted',
-                'appointment'   => $appointment
-            ], 200);
+            return redirect()->back()->with('success', 'Appointment Accepted');
         } catch (ModelNotFoundException $e) {
             DB::Rollback();
             Log::error('Model error: ' . $e->getMessage());

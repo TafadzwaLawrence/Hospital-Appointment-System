@@ -40,13 +40,4 @@
 
         @livewireScripts)
     </body>
-    @if (Session::has('message'))
-    <script>
-        toastr.options = {
-            'progress' : true,
-            'closeButton' : true,
-        };
-        toastr.success('{{ Session::get('message') }}');
-    </script>
-    @endif
 </html>

@@ -19,6 +19,8 @@ class Appointments extends Model
         'address',
         'reason_of_visit',
         'emergency_contact',
-        'email'
+        'doctor',
+        'booked',
+        'email',
     ];
 }
