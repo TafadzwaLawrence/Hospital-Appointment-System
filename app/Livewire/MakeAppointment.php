@@ -33,7 +33,6 @@ class MakeAppointment extends Component
         );
 
         $this->resetInputFields();
-        $this->emitTo('livewire-toast', 'show', 'Project Added Successfully');
         return view('livewire.make-appointment');
     }
 

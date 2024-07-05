@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('reason_of_visit');
             $table->string('emergency_contact');
             $table->string('email');
+            $table->boolean('booked')->default(false);
+            $table->string('doctor')->nullable();
             $table->timestamps();
         });
     }

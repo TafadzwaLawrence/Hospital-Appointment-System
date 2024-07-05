@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AppointmentsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,12 +32,15 @@ Route::middleware([
 
 
 // web.php
-Route::middleware(['auth:sanctum', 'role:admin', config('jetstream.auth_session'), 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', 'role:doctor', config('jetstream.auth_session'), 'verified'])->group(function () {
     // Routes accessible only to admin
+
 });
 
-Route::middleware(['auth', 'role:admin,doctor'])->group(function () {
-    // Routes accessible to admin and doctor
-});
+Route::post('/accept/{id}/appointment', [AppointmentsController::class, 'accept_appointment'])->name('accept.appointment.patient');
+// Routes accessible to admin and doctor
+
+
+
 
 
