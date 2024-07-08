@@ -2,6 +2,7 @@
     <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
         <thead class="ltr:text-left rtl:text-right">
             <tr>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"></th>
             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Last Name</th>
             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Date of Birth</th>
             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Phone</th>
@@ -13,6 +14,9 @@
         <tbody class="divide-y divide-gray-200">
             @foreach($data as $item)
             <tr>
+                <td class="whitespace-nowrap px-4 py-2">
+                    <span class="inline-block rounded-full w-4 h-4" style="background-color: {{ $item->booked ? 'green' : 'red' }};"></span>
+            </td>
             <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $item->first_name }}</td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $item->date_of_birth }}</td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $item->phone }}</td>

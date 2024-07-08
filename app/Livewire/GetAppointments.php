@@ -20,6 +20,8 @@ class GetAppointments extends Component
             'address',
             'reason_of_visit',
             'emergency_contact',
+            'doctor',
+            'booked',
             'email'
             )->get();
     }

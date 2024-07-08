@@ -25,6 +25,16 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            animation: {
+                swing: 'swing 2s ease-in-out infinite',
+            },
+            keyframes: {
+                swing: {
+                    '0%, 100%': { transform: 'translateX(0)' },
+                    '10%, 30%, 50%, 70%': { transform: 'translateX(-2px)' },
+                    '20%, 40%, 60%, 80%': { transform: 'translateX(2px)' },
+                  }
+            },
         },
     },
 
