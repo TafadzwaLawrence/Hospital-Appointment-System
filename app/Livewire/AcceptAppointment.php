@@ -4,12 +4,19 @@ namespace App\Livewire;
 
 use LivewireUI\Modal\ModalComponent;
 use App\Models\Appointments;
+use Illuminate\Support\Facades\Auth;
+
 
 class AcceptAppointment extends ModalComponent
 {
     public Appointments $appointment;
+
     public function render()
     {
-        return view('livewire.accept-appointment');
+        $appointments = Appointments::where('user_id', Auth::id())
+            ->where('booked', true)
+            ->get();
+
+        return view('livewire.accept-appointment', ['appointments' => $appointments]);
     }
 }

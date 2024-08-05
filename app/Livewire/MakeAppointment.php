@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class MakeAppointment extends Component
 {
+    public $displayedComponent = 'make-appointment';
+
+    public function switchComponent($componentName)
+    {
+        $this->displayedComponent = $componentName;
+    }
+
     public $first_name = '';
     public $last_name = '';
     public $date_of_birth = '';
@@ -16,6 +23,7 @@ class MakeAppointment extends Component
     public $reason_of_visit = '';
     public $emergency_contact = '';
     public $email = '';
+    public $saved = false;
 
     public function save(Request $request)
     {
@@ -33,7 +41,8 @@ class MakeAppointment extends Component
         );
 
         $this->resetInputFields();
-        return view('livewire.make-appointment');
+        notify()->success('Appointment Accepted');
+        $this->saved = true;
     }
 
     private function resetInputFields()
@@ -50,6 +59,11 @@ class MakeAppointment extends Component
 
     public function render()
     {
-        return view('livewire.make-appointment');
+        if ($this->saved) {
+            notify()->success('Appointment Accepted');
+        }
+        return view('livewire.make-appointment', [
+            'componentName' => $this->displayedComponent,
+        ]);
     }
 }

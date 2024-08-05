@@ -37,7 +37,9 @@ Route::middleware(['auth:sanctum', 'role:doctor', config('jetstream.auth_session
 
 });
 
-Route::post('/accept/{id}/appointment', [AppointmentsController::class, 'accept_appointment'])->name('accept.appointment.patient');
+Route::post('/request/appointment', [AppointmentsController::class, 'store_appointment'])->name('request.appointment');
+Route::post('/accept/{id}/appointment/{date}', [AppointmentsController::class, 'accept_appointment'])->name('accept.appointment.patient');
+Route::post('/decline/{id}/appointment', [AppointmentsController::class, 'decline-appointment'])->name('decline.appointment.patient');
 // Routes accessible to admin and doctor
 
 

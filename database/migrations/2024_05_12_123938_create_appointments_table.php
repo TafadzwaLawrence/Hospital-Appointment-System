@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('first_name');
             $table->string('last_name');
             $table->date('date_of_birth');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('email');
             $table->boolean('booked')->default(false);
             $table->string('doctor')->nullable();
+            $table->date('date_of_appointment')->nullable();
             $table->timestamps();
         });
     }

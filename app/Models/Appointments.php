@@ -12,6 +12,7 @@ class Appointments extends Model
     protected $table = 'appointments';
 
     protected $fillable = [
+        'user_id',
         'first_name',
         'last_name',
         'date_of_birth',
@@ -22,5 +23,6 @@ class Appointments extends Model
         'doctor',
         'booked',
         'email',
+        'date_of_appointment'
     ];
 }
