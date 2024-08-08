@@ -42,42 +42,42 @@
     </table>
 
     {{-- modal --}}
-    <div id="modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity hidden" aria-hidden="true">
-        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div class="relative transform overflow-visible rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl h-3/4"> <!-- add h-screen class -->
-                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Patient Details</h3>
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-500" id="patient-name">Name:</p>
-                                </div>
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-500" id="patient-phone">Phone:</p>
-                                </div>
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-500" id="patient-dob">Date of Birth:</p>
-                                </div>
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-500" id="patient-reason">Reason for illness:</p>
-                                </div>
-                                <div class="mt-2">
-                                    <x-datetime-picker
-                                            name="date_of_appointment"
-                                            label="Date of Appointment"
-                                            placeholder="Date of Birth"
-                                            id="appointment_date"
-                                            display-format="YYYY-MM-DD HH:mm"
-                                            portal
-                                    />
+    <form action="" id="accept-form" method="post">
+        @csrf
+        <div id="modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity hidden" aria-hidden="true">
+            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                    <div class="relative transform overflow-visible rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl h-3/4">
+                        <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                            <div class="sm:flex sm:items-start">
+                                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Patient Details</h3>
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-500" id="patient-name">Name: </p>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-500" id="patient-phone">Phone: </p>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-500" id="patient-dob">Date of Birth: </p>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-500" id="patient-reason">Reason for illness: </p>
+                                    </div>
+                                    <div class="mt-2">
+                                        <x-datetime-picker
+                                                name="date_of_appointment"
+                                                label="Date of Appointment"
+                                                placeholder="Date of Appointment"
+                                                id="appointment_date"
+                                                display-format="YYYY-MM-DD"
+                                                portal
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <form action="" id="accept-form" method="post">
-                        @csrf
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                         <input type="hidden" id="appointment_date_input" name="appointment_date">
                         <button
                             id="accept-btn"
@@ -85,43 +85,44 @@
                             class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 sm:ml-3 sm:w-auto">
                                 Accept
                         </button>
-                    </form>
+                        </form>
 
-                    <button
-                        type="button"
-                        class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                        onclick="document.getElementById('modal').classList.add('hidden');
-                        document.querySelector('#modal > div').classList.add('hidden')">
-                        Cancel
-                </button>
+                        <button
+                            type="button"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                            onclick="document.getElementById('modal').classList.add('hidden');
+                            document.querySelector('#modal > div').classList.add('hidden')">
+                            Cancel
+                    </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    </div>
-    {{-- end of modal --}}
-</div>
+        </div>
+    </form>
 
-<script>
-    document.getElementById('appointment_date').addEventListener('change', function() {
-        document.getElementById('appointment_date_input').value = this.value;
-    });
+    <script>
+        function populateModal(id, firstName, phone, dob, reason) {
+            document.getElementById('patient-name').innerHTML = `Name: ${firstName}`;
+            document.getElementById('patient-phone').innerHTML = `Phone: ${phone}`;
+            document.getElementById('patient-dob').innerHTML = `Date of Birth: ${dob}`;
+            document.getElementById('patient-reason').innerHTML = `Reason for illness: ${reason}`;
 
-    function populateModal(id, firstName, phone, dob, reason) {
-    document.getElementById('patient-name').innerHTML = `Name: ${firstName}`;
-    document.getElementById('patient-phone').innerHTML = `Phone: ${phone}`;
-    document.getElementById('patient-dob').innerHTML = `Date of Birth: ${dob}`;
-    document.getElementById('patient-reason').innerHTML = `Reason for illness: ${reason}`;
+            // Update the form action when the accept button is clicked
+            const acceptForm = document.getElementById('accept-form');
+            const appointmentDateInput = document.getElementById('appointment_date_input');
 
-    // Update the form action when the accept button is clicked
-    document.getElementById('accept-btn').addEventListener('click', function() {
-        var appointmentDate = document.getElementById('appointment_date_input').value;
-        document.getElementById('accept-form').action = "/accept/" + id + "/appointment" + "/" + appointmentDate;
-    });
-}
-</script>
+            const appointmentDatePicker = document.getElementById('appointment_date');
+            appointmentDateInput.value = appointmentDatePicker.value;
 
+            acceptForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                acceptForm.action = `/accept/${id}/appointment/${appointmentDateInput.value}`;
+                acceptForm.submit();
+            });
+        }
+    </script>
 
 <script>
     const form = document.getElementById('accept-form');

@@ -23,7 +23,7 @@ class GetAppointments extends Component
             'doctor',
             'booked',
             'email'
-            )->get();
+            )->where('booked', false)->get();
     }
     public function render()
     {

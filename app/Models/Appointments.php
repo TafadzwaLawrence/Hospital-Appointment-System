@@ -25,4 +25,9 @@ class Appointments extends Model
         'email',
         'date_of_appointment'
     ];
+
+    public function doctorName()
+    {
+        return $this->belongsTo(User::class, 'doctor', 'id');
+    }
 }

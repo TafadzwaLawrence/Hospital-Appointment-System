@@ -15,6 +15,7 @@ class AcceptAppointment extends ModalComponent
     {
         $appointments = Appointments::where('user_id', Auth::id())
             ->where('booked', true)
+            ->with('doctorName')
             ->get();
 
         return view('livewire.accept-appointment', ['appointments' => $appointments]);
